@@ -1,5 +1,7 @@
 FROM registry.fedoraproject.org/fedora-minimal:latest
 
+LABEL org.freedesktop.ostree.bootable=true
+
 # Install essential packages using microdnf
 RUN microdnf install -y \
     rpm-ostree \
