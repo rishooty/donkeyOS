@@ -1,4 +1,4 @@
-FROM fedora-minimal:latest
+FROM registry.fedoraproject.org/fedora-minimal:latest
 
 # Install essential packages using microdnf
 RUN microdnf install -y \
