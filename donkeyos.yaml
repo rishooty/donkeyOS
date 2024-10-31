@@ -1,0 +1,17 @@
+ref: donkeyos/base/x86_64
+repos:
+  - fedora-39
+packages:
+  - rpm-ostree
+  - ostree
+  - kernel
+  - systemd
+  - dracut
+  - sudo
+  - grub2-efi-x64
+  - grub2-pc
+  - efibootmgr
+automatic_version_prefix: "1.0"
+boot_location: new
+documentation: false
+tmp_is_dir: true
