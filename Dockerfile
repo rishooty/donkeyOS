@@ -1,10 +1,7 @@
 FROM registry.fedoraproject.org/fedora-minimal:latest
 
-# Set up labels
-LABEL org.opencontainers.image.title="DonkeyOS Base"
-LABEL org.opencontainers.image.description="A minimal OSTree-native container base"
-LABEL org.freedesktop.ostree.bootable="true"
-LABEL io.github.containers.ostree.bootable="true"
+# Set the correct ostree bootable label
+LABEL ostree.bootable="true"
 
 # Install essential packages using microdnf
 RUN microdnf install -y \
