@@ -1,6 +1,10 @@
 FROM registry.fedoraproject.org/fedora-minimal:latest
 
-LABEL org.freedesktop.ostree.bootable=true
+# Set up labels
+LABEL org.opencontainers.image.title="DonkeyOS Base"
+LABEL org.opencontainers.image.description="A minimal OSTree-native container base"
+LABEL org.freedesktop.ostree.bootable="true"
+LABEL io.github.containers.ostree.bootable="true"
 
 # Install essential packages using microdnf
 RUN microdnf install -y \
@@ -10,6 +14,9 @@ RUN microdnf install -y \
     systemd \
     dracut \
     sudo \
+    grub2-efi-x64 \
+    grub2-pc \
+    efibootmgr \
     && microdnf clean all
 
 # Configure the system
@@ -20,6 +27,16 @@ RUN systemctl mask tmp.mount \
 
 # Set up the root password
 RUN echo "root:password123" | chpasswd
+
+# Create necessary directories for OSTree
+RUN mkdir -p /sysroot \
+    && mkdir -p /var \
+    && mkdir -p /usr/etc \
+    && mkdir -p /etc/ostree/remotes.d
+
+# Configure OSTree
+RUN ostree admin init-fs /sysroot \
+    && ostree config --repo=/sysroot/ostree/repo set sysroot.readonly true
 
 # Commit the container
 CMD ["ostree", "container", "commit"]
