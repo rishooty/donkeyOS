@@ -4,10 +4,6 @@
 
 podman build -t ghcr.io/rishooty/donkeyos:latest .
 
-## Test
-
-podman-bootc run --filesystem=xfs ghcr.io/rishooty/donkeyos:latest
-
 ## Deploy
 
 rpm-ostree rebase --experimental ostree-unverified-registry:ghcr.io/rishooty/donkeyos:latest
